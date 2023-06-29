@@ -1,0 +1,10 @@
+.body{
+  font-family: Arial;
+}
+
+.title { 
+  text-align: center;
+  line-height: 50px;
+  font-size: 25px;
+  font-weight: bold;
+}
