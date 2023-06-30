@@ -1,8 +1,24 @@
 var boxes = new Array(' ', 81);
+let numPrint;
+let buttonElement = '';
 
-function makegrid(){
+function selectedNum(buttonName){
+  const tempButton = document.querySelector(buttonName);
 
-  for( let i = 0; i<10; i++){
-    let myRow 
+  if (buttonElement === ''){
+    buttonElement = tempButton
+    tempButton.classList.add('button-selected');
   }
+
+  else if (buttonElement !== tempButton){
+    buttonElement.classList.remove('button-selected');
+    buttonElement = tempButton;
+    tempButton.classList.add('button-selected');
+  }
+  
+  else if (buttonElement === tempButton){
+    buttonElement = '';
+    tempButton.classList.remove('button-selected');
+  }
+
 }
