@@ -29,3 +29,18 @@ button {
   background-color: darkgreen;
   
 }
+
+.css-Buttongrid{
+  background-color: transparent;
+  border-color: black;
+}
+
+.css-grids {
+  display: grid;
+  grid-template-columns: 45px 50px 50px 50px 50px 50px 50px 50px 50px;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 70px;
+}
