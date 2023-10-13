@@ -37,6 +37,10 @@ function makeGrid(){
 
     if(problem[r][c] !== 0){
       box.innerText = problem[r][c];
+      box.classList.add("givenBox");
+    }
+    else{
+      box.classList.add("answerBox");
     }
     
     box.classList.add("box")
@@ -59,42 +63,98 @@ function makeDigits(){
     let num = document.createElement("div");
     num.id = "digit" + i.toString();
     num.innerText = i;
-    num.classList.add("digit")
+    num.classList.add("digit");
+    num.addEventListener("click", addNum);
     document.getElementById("digitList").appendChild(num);
   }
 }
 
 //highlights the selected box along with the row and the col the box is in.
-let boxElement = '';
+let boxElement = null;
 function selectedBox(){
   const tempBox = this;
 
-  if (boxElement === ''){
-    boxElement = tempBox
-    tempBox.classList.add('box-selected');
-    console.log(tempBox.id);
-    //adds box-selected class to the row and col
-    changeBoxSelected(boxElement, "add");
+  if (boxElement === null){
+    if(tempBox.classList.contains("answerBox")){
+      boxElement = tempBox
+      tempBox.classList.add('box-selected');
+      //adds box-selected class to the row and col
+      changeBoxSelected(boxElement, "add");
+
+    }else if(tempBox.classList.contains("givenBox")){
+      boxElement = tempBox;
+      highlightBox(boxElement, "add");
+    }
     
 
   }
 
   else if (boxElement !== tempBox){
-    boxElement.classList.remove('box-selected');
-    //removes box-selected class to the row and col
-    changeBoxSelected(boxElement, "remove");
+    if(boxElement.classList.contains("givenBox")){
+
+      highlightBox(boxElement, "remove");
+    }else if (boxElement.classList.contains("answerBox")){
+      boxElement.classList.remove('box-selected');
+      //removes box-selected class to the row and col
+      changeBoxSelected(boxElement, "remove");
+    }
+    
 
     boxElement = tempBox;
-    tempBox.classList.add('box-selected');
-    changeBoxSelected(boxElement, "add");
+    
+    if(boxElement.classList.contains("givenBox")){
+
+      highlightBox(boxElement, "add");
+
+    }else if (boxElement.classList.contains("answerBox")){
+      boxElement.classList.add('box-selected');
+      //removes box-selected class to the row and col
+      changeBoxSelected(boxElement, "add");
+    }
+
   }
   
   else if (boxElement === tempBox){ 
-    boxElement.classList.remove('box-selected');
-    changeBoxSelected(boxElement, "remove");
-    boxElement = '';
+
+    if(boxElement.classList.contains("givenBox")){
+
+      highlightBox(boxElement, "remove");
+
+    }else if (boxElement.classList.contains("answerBox")){
+
+      boxElement.classList.remove('box-selected');
+      //removes box-selected class to the row and col
+      changeBoxSelected(boxElement, "remove");
+    }
+
+    boxElement = null;
   }
   
+}
+
+function highlightBox(box, change){
+  
+  if(change === "add"){
+
+    for(let i = 0; i < 9; i++ ){
+      for(let j = 0; j <9; j++){
+        let temp = document.getElementById(`box_${i}_${j}`)
+        if(temp.classList.contains("givenBox") && temp.innerText === box.innerText){
+          temp.classList.add("numMatch");
+        }
+      }
+    }
+  }else if(change === "remove"){
+
+    for(let i = 0; i < 9; i++ ){
+      for(let j = 0; j <9; j++){
+        let temp = document.getElementById(`box_${i}_${j}`)
+        if(temp.classList.contains("numMatch")){
+          temp.classList.remove("numMatch");
+        }
+      }
+    }
+  }
 }
 
 //Used to highlight the rows and cols of the selected box in the grid.
@@ -123,4 +183,44 @@ function changeBoxSelected(box, change){
   }
 }
 
+function addNum(){
+  if(boxElement !== null){
+    const digit = this;
+    r = parseInt(boxElement.id[4]);
+    c = parseInt(boxElement.id[6]);
 
+    problem[r][c] = parseInt(digit.innerText);
+    document.getElementById(`box_${r}_${c}`).innerText = problem[r][c];
+    compareArray();
+  }
+}
+
+function Erase(){
+  if(boxElement !== null){
+    if(boxElement.classList.contains("answerBox"))
+      r = parseInt(boxElement.id[4]);
+      c = parseInt(boxElement.id[6]);
+
+      console.log("erasing");
+      problem[r][c] = 0;
+      document.getElementById(`box_${r}_${c}`).innerText = null;
+      compareArray();
+  }
+}
+
+function compareArray(){
+  for(let i = 0; i < 9; i++ ){
+    for(let j = 0; j <9; j++){
+
+      if(problem[r][c] !== solution[r][c] && problem[r][c] !== 0){
+        document.getElementById(`box_${r}_${c}`).classList.add("incorrect");
+      }
+      
+      else if((problem[r][c] === solution[r][c] || problem[r][c] === 0) && document.getElementById(`box_${r}_${c}`).classList.contains("inccorect")){
+        
+        document.getElementById(`box_${r}_${c}`).classList.remove("incorrect")
+      }
+
+    }
+  }
+}
