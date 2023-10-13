@@ -1,46 +1,93 @@
-.body{
+
+body{
   font-family: Arial;
+  text-align: center;
+  /* background-color: aquamarine; */
+  background-color: aquamarine;
 }
 
-.header { 
-  text-align: center;
-  line-height: 50px;
-  font-weight: bold;
-}
 
-button {
-  background-color: transparent;  
-  text-align: center;
-  font-size: 25px;
-  width: 50px;
+/*CSS for Digits*/
+
+#digitList{
+  width: 550px;
   height: 50px;
-  cursor: pointer;
-}
-
-.button-grid {
+  margin: auto;
   display: flex;
-  column-gap: 20px;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+
+} 
+
+.digit{
+  background-color: white;
+  border: 1px solid black;
+  flex-basis: 50px;
+
+
+  /* Text */
+  font-size: 35px;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
   justify-content: center;
+  cursor: pointer;
 
 }
 
-.button-selected{
-  background-color: darkgreen;
-  
-}
+/*End of CSS for Digits*/
 
-.css-Buttongrid{
-  background-color: transparent;
-  border-color: black;
-}
 
-.css-grids {
-  display: grid;
-  grid-template-columns: 45px 50px 50px 50px 50px 50px 50px 50px 50px;
-  column-gap: 10px;
-  row-gap: 10px;
-  align-items: center;
+/* CSS for Sudoku Grid*/
+#sudokuGrid{
+  width: 552px;
+  height: 552px;
+  background-color: white;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+} 
+
+.box{
+
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  flex-basis: 60px;
+  height: 60px;
+
+
+  /* Text */
+  font-size: 35px;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
   justify-content: center;
-  margin-bottom: 70px;
+  cursor: pointer;
+
 }
+
+.box-selected{
+  background-color: lightgray;
+}
+
+/*adds the top borders of the grid*/
+.box:nth-child(-n+9){
+  border-top: 1px solid gray;
+}
+
+/*adds the right borders of the grid*/
+.box:nth-child(9n-8){
+  border-left: 1px solid gray;
+}
+
+/*adds the bottom borders to the box*/
+.horizontal{
+  border-bottom: 2px solid black;
+}
+
+/*adds the right borders to the box*/
+.vertical{
+  border-right: 2px solid black;
+}
+/*End of CSS for Sudoku Grid*/

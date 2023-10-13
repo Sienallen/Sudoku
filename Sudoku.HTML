@@ -7,41 +7,17 @@
   
   <link rel="stylesheet" href="Sudoku.css">
 </head>
+
 <body>
   <header>
     <h1 class = "header">Project Sudoku</h1>
   </header>
   
   <main >
-    <div class = "Sudoku-grids css-grids "onload="makeGrid()"></div>
+    <div id = "sudokuGrid"></div>
+    <br>
+    <div id = "digitList"></div>
   </main>
-
-  <footer>
-    <div class = "button-grid">
-      <button class ="css-button1" onclick="
-      selectedNum('.css-button1')">1</button>
-      <button class ="css-button2" onclick="
-      selectedNum('.css-button2')">2</button>
-      <button class ="css-button3" onclick="
-      selectedNum('.css-button3')">3</button>
-      <button class ="css-button4" onclick="
-      selectedNum('.css-button4')">4</button>
-      <button class ="css-button5" onclick="
-      selectedNum('.css-button5')">5</button>
-      <button class ="css-button6" onclick="
-      selectedNum('.css-button6')">6</button>
-      <button class ="css-button7" onclick="
-      selectedNum('.css-button7')">7</button>
-      <button class ="css-button8" onclick="
-      selectedNum('.css-button8')">8</button>
-      <button class ="css-button9" onclick="
-      selectedNum('.css-button9')">9</button>
-    </div>
-    
-
-  </footer>
-  
-  
 
   <script src="Sudoku.js"> </script>
 
