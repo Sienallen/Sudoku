@@ -204,7 +204,14 @@ function Erase(){
       console.log("erasing");
       problem[r][c] = 0;
       document.getElementById(`box_${r}_${c}`).innerText = null;
-      compareArray();
+
+      if(document.getElementById(`box_${r}_${c}`).classList.contains("incorrect")){
+        document.getElementById(`box_${r}_${c}`).classList.remove("incorrect");
+      }
+      else if(document.getElementById(`box_${r}_${c}`).classList.contains("correct")){
+        document.getElementById(`box_${r}_${c}`).classList.remove("correct");
+      }
+      
   }
 }
 
